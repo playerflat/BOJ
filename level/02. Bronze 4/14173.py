@@ -1,0 +1,5 @@
+a = list(map(int, input().split()))
+b = list(map(int, input().split()))
+r1 = max(a[2], b[2]) - min(a[0], b[0])
+r2 = max(a[3], b[3]) - min(a[1], b[1])
+print(max(r1, r2) ** 2)
