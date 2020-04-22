@@ -66,8 +66,10 @@ for i in level_dict:
     if not os.path.isdir(f'./level/{level_dict[i]}'):
         os.makedirs(f'./level/{level_dict[i]}')
 
-# 난이도 별 파일 복사
+# 난이도 별 파일 이동
 sourcecode_list = os.listdir('./sourcecode/')
 for i in range(len(sourcecode_list)):
     lv = int(level.at[int(sourcecode_list[i].split(".")[0]), 'Level'])
     os.rename(f'./sourcecode/{sourcecode_list[i]}', f'./level/{level_dict[lv]}/{sourcecode_list[i]}')
+
+# 난이도 변경 시 폴더에서 이동
