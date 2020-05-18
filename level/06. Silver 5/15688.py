@@ -1,3 +1,5 @@
+# PyPy3
+
 import sys
 from collections import defaultdict
 

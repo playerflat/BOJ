@@ -39,7 +39,7 @@ def download_level():
             for tag in r:
                 df.loc[df_index] = [i, tag.text.strip()]
                 df_index += 1
-            time.sleep(0.5)
+            time.sleep(0.3)
         print(f'complete {i}')
     df.to_csv('./Level.csv', index=False)
 
