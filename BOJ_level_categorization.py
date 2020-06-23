@@ -30,16 +30,20 @@ def download_level():
     df = pd.DataFrame(data={'Level': [], 'Number': []}, columns=['Level', 'Number'])
     df_index = 0
     for i in range(31):  # 난이도 0(unrated) ~ 30(Ruby I)
+        c = 0
         for j in range(1, 100):  # 특정 난이도 내 페이지 개수
             res = requests.get(f'https://solved.ac/problems/level/{i}?page={j}')
             soup = BeautifulSoup(res.content, 'html.parser')
-            r = soup.find_all('a', {'class': 'problem_id'})
-            if not r:  # 페이지에 항목 없으면 다음 난이도로 ㄱㄱ
+            r = soup.find_all('span')
+            c += 1
+            if c > 0:  # 페이지에 항목 없으면 다음 난이도로 ㄱㄱ
                 break
             for tag in r:
-                df.loc[df_index] = [i, tag.text.strip()]
-                df_index += 1
-            time.sleep(0.3)
+                if tag.text.isnumeric():
+                    c = 0
+                    df.loc[df_index] = [i, tag.text.strip()]
+                    df_index += 1
+            time.sleep(0.1)
         print(f'complete {i}')
     df.to_csv('./Level.csv', index=False)
 
