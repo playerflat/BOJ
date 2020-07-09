@@ -36,7 +36,7 @@ def download_level():
             soup = BeautifulSoup(res.content, 'html.parser')
             r = soup.find_all('span')
             c += 1
-            if c > 0:  # 페이지에 항목 없으면 다음 난이도로 ㄱㄱ
+            if c > 1:  # 페이지에 항목 없으면 다음 난이도로 ㄱㄱ
                 break
             for tag in r:
                 if tag.text.isnumeric():
