@@ -77,3 +77,10 @@ for i in range(len(sourcecode_list)):
     os.rename(f'./sourcecode/{sourcecode_list[i]}', f'./level/{level_dict[lv]}/{sourcecode_list[i]}')
 
 # 난이도 변경 시 폴더에서 이동
+level_list = os.listdir('./level/')
+for i in range(len(level_list)):
+    level_code_list = os.listdir(f'./level/{level_list[i]}')
+    for j in range(len(level_code_list)):
+        lv = int(level.at[int(level_code_list[j].split(".")[0]), 'Level'])
+        if lv != i:
+            os.rename(f'./level/{level_list[i]}/{level_code_list[j]}', f'./level/{level_list[lv]}/{level_code_list[j]}')

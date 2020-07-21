@@ -17,7 +17,7 @@ func main() {
 		fmt.Fscanln(r, &a)
 		if a == 0 {
 			break
-		} // 3 받으면 4 ~ 6 사이의 소수 개수 구하
+		}
 		b := a * 2
 		a++
 		for ; a <= b; a++ {
