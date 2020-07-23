@@ -49,9 +49,9 @@ def download_level():
 
 
 # 난이도별 문제 번호가 적힌 csv 파일 불러오기
-# csv 파일이 없거나 수정된 지 7일 이상 지난 파일이면 solved.ac 크롤링
+# csv 파일이 없거나 수정된 지 10일 이상 지난 파일이면 solved.ac 크롤링
 level = './Level.csv'
-if not os.path.isfile(level) or (time.time() - os.stat(level).st_mtime) / 86400 > 7:
+if not os.path.isfile(level) or (time.time() - os.stat(level).st_mtime) / 86400 > 10:
     download_level()
 level = pd.read_csv(level).set_index('Number')
 
@@ -71,12 +71,14 @@ for i in level_dict:
         os.makedirs(f'./level/{level_dict[i]}')
 
 # 난이도 별 파일 이동
+# csv 파일의 Level 열에 기준하여 파일 이동
 sourcecode_list = os.listdir('./sourcecode/')
 for i in range(len(sourcecode_list)):
     lv = int(level.at[int(sourcecode_list[i].split(".")[0]), 'Level'])
     os.rename(f'./sourcecode/{sourcecode_list[i]}', f'./level/{level_dict[lv]}/{sourcecode_list[i]}')
 
 # 난이도 변경 시 폴더에서 이동
+# level 폴더의 코드파일이 속한 난이도와 csv의 Level 열과 비교 후 이동
 level_list = os.listdir('./level/')
 for i in range(len(level_list)):
     level_code_list = os.listdir(f'./level/{level_list[i]}')
